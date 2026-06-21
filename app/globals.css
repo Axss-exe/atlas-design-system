@@ -28,6 +28,12 @@
   --color-ring: var(--ring);
   --color-hover: var(--hover);
 
+  --color-accent-signal: var(--accent-signal);
+  --color-positive: var(--positive);
+  --color-watch: var(--watch);
+  --color-alert: var(--alert);
+  --color-grid: var(--grid);
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -57,6 +63,12 @@
   --input: #e5e7eb;
   --ring: #d1d5db;
   --hover: #f5f5f5;
+  /* Single editorial signal + restrained status trio */
+  --accent-signal: #b45309;
+  --positive: #15803d;
+  --watch: #b45309;
+  --alert: #b91c1c;
+  --grid: #ededed;
   --radius: 0.75rem;
 }
 
