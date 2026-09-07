@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowDown, ArrowRight, Network, ScanLine } from 'lucide-react'
+import { ArrowRight, ScanLine } from 'lucide-react'
 import { useState } from 'react'
 import { COUNTRY_IDS, getCountry } from '@/lib/atis/countries'
 import { isFlagship } from '@/lib/atis/entities'
@@ -13,60 +13,8 @@ const FLAGSHIP_PREVIEW = COUNTRY_IDS.filter(isFlagship).slice(0, 8)
 export function LandingView({ onEnterCountry }: { onEnterCountry: (id: string) => void }) {
   const [selectedId, setSelectedId] = useState<string | null>(null)
 
-  const scrollToAtlas = () => {
-    document.getElementById('atlas-entry')?.scrollIntoView({ behavior: 'smooth' })
-  }
-
   return (
     <div>
-      <section className="relative isolate overflow-hidden border-b border-border bg-foreground text-background">
-        <div className="pointer-events-none absolute inset-0 opacity-20 [background-image:linear-gradient(to_right,rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:56px_56px]" />
-        <div className="relative mx-auto flex min-h-[calc(100svh-57px)] max-w-7xl flex-col justify-between px-6 py-8 sm:px-10 lg:px-16 lg:py-12">
-          <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] text-background/60">
-            <span>ATIS / Public preview</span>
-            <span>Illustrative data</span>
-          </div>
-
-          <div className="grid gap-12 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-20">
-            <div className="flex flex-col gap-8">
-              <div className="flex items-center gap-3 text-accent-signal">
-                <img src="/atis-symbol-traced.svg" alt="ATIS symbol" className="size-12 object-contain sm:size-14" />
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em]">Africa Trade Intelligence System</span>
-              </div>
-              <h1 className="max-w-4xl text-balance font-serif text-[clamp(3.5rem,10vw,8.5rem)] leading-[0.86] tracking-[-0.06em]">
-                Africa is connected.<br />Its information isn&apos;t.
-              </h1>
-              <p className="max-w-xl text-pretty text-base leading-relaxed text-background/65 sm:text-lg">
-                ATIS is being built to make the relationships between countries, entities, evidence, events and information visible.
-              </p>
-              <button type="button" onClick={scrollToAtlas} className="group flex w-fit items-center gap-3 border-b border-background/50 pb-2 font-mono text-[11px] uppercase tracking-[0.16em] transition-colors hover:border-accent-signal hover:text-accent-signal">
-                Explore the concept
-                <ArrowDown className="size-4 transition-transform group-hover:translate-y-1" />
-              </button>
-            </div>
-
-            <div className="border border-background/20 font-mono text-[10px] uppercase tracking-[0.14em] text-background/60">
-              <div className="border-b border-background/15 px-4 py-3">A system for following the thread</div>
-              <div className="grid grid-cols-2 gap-px bg-background/15">
-                <PreviewCell label="Begin" value="Africa" />
-                <PreviewCell label="Open" value="Entities" />
-                <PreviewCell label="Trace" value="Relations" />
-                <PreviewCell label="Read" value="Context" />
-              </div>
-              <div className="flex items-center gap-3 border-t border-background/15 px-4 py-4 text-background/80">
-                <Network className="size-4 text-accent-signal" />
-                <span>One entity rarely tells the story. The relationships do.</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-end justify-between border-t border-background/15 pt-5 font-mono text-[10px] uppercase tracking-[0.16em] text-background/45">
-            <span>Concept / in development</span>
-            <span>01 — 26</span>
-          </div>
-        </div>
-      </section>
-
       <section id="atlas-entry" className="scroll-mt-16 border-b border-border bg-secondary/40">
         <div className="mx-auto grid max-w-7xl gap-0 lg:grid-cols-[minmax(0,440px)_1fr]">
           <div className="flex flex-col justify-between border-b border-border px-6 py-10 sm:px-10 lg:border-b-0 lg:border-r lg:px-12 lg:py-14">
@@ -132,10 +80,6 @@ export function LandingView({ onEnterCountry }: { onEnterCountry: (id: string) =
       </section>
     </div>
   )
-}
-
-function PreviewCell({ label, value }: { label: string; value: string }) {
-  return <div className="flex min-h-24 flex-col justify-between bg-background/5 p-4"><span className="text-background/40">{label}</span><span className="font-serif text-2xl normal-case tracking-tight text-background">{value}</span></div>
 }
 
 function Feature({ icon, title, body }: { icon: React.ReactNode; title: string; body: string }) {
