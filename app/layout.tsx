@@ -15,9 +15,9 @@ const sourceSerif = Source_Serif_4({
 })
 
 export const metadata: Metadata = {
-  title: 'ATIS — Analytical Trade Intelligence System',
+  title: 'ATIS — Africa Trade Intelligence System',
   description:
-    'A living intelligence atlas of Africa. Explore countries, entities, and strategic resources through a calm, document-first investigation experience.',
+    'ATIS connects evidence, entities, relationships, events and emerging stories to make African information legible.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         media: '(prefers-color-scheme: dark)',
       },
       {
-        url: '/icon.svg',
+        url: '/atis-symbol-traced.svg',
         type: 'image/svg+xml',
       },
     ],

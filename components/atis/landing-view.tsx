@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowRight, Globe2, Layers, Network } from 'lucide-react'
+import { ArrowDown, ArrowRight, Network, ScanLine } from 'lucide-react'
 import { useState } from 'react'
 import { COUNTRY_IDS, getCountry } from '@/lib/atis/countries'
 import { isFlagship } from '@/lib/atis/entities'
@@ -10,118 +10,138 @@ import { Eyebrow } from './primitives'
 
 const FLAGSHIP_PREVIEW = COUNTRY_IDS.filter(isFlagship).slice(0, 8)
 
-export function LandingView({
-  onEnterCountry,
-}: {
-  onEnterCountry: (id: string) => void
-}) {
+export function LandingView({ onEnterCountry }: { onEnterCountry: (id: string) => void }) {
   const [selectedId, setSelectedId] = useState<string | null>(null)
 
+  const scrollToAtlas = () => {
+    document.getElementById('atlas-entry')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
-    <div className="relative grid min-h-[calc(100vh-57px)] grid-cols-1 lg:grid-cols-[minmax(0,440px)_1fr]">
-      {/* Editorial intro panel */}
-      <section className="flex flex-col justify-between border-b border-border px-6 py-10 sm:px-10 lg:border-b-0 lg:border-r">
-        <div className="flex flex-col gap-7">
-          <div className="flex items-center gap-2">
-            <span className="inline-block size-1.5 rounded-full bg-accent-signal" />
-            <Eyebrow>Live intelligence atlas · 50 nations</Eyebrow>
+    <div>
+      <section className="relative isolate overflow-hidden border-b border-border bg-foreground text-background">
+        <div className="pointer-events-none absolute inset-0 opacity-20 [background-image:linear-gradient(to_right,rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:56px_56px]" />
+        <div className="relative mx-auto flex min-h-[calc(100svh-57px)] max-w-7xl flex-col justify-between px-6 py-8 sm:px-10 lg:px-16 lg:py-12">
+          <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] text-background/60">
+            <span>ATIS / Public preview</span>
+            <span>Illustrative data</span>
           </div>
 
-          <h1 className="text-balance font-serif text-[2.75rem] leading-[1.04] tracking-tight text-foreground sm:text-5xl">
-            The continent, read as a single document.
-          </h1>
+          <div className="grid gap-12 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-20">
+            <div className="flex flex-col gap-8">
+              <div className="flex items-center gap-3 text-accent-signal">
+                <img src="/atis-symbol-traced.svg" alt="ATIS symbol" className="size-12 object-contain sm:size-14" />
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em]">Africa Trade Intelligence System</span>
+              </div>
+              <h1 className="max-w-4xl text-balance font-serif text-[clamp(3.5rem,10vw,8.5rem)] leading-[0.86] tracking-[-0.06em]">
+                Africa is connected.<br />Its information isn&apos;t.
+              </h1>
+              <p className="max-w-xl text-pretty text-base leading-relaxed text-background/65 sm:text-lg">
+                ATIS is being built to make the relationships between countries, entities, evidence, events and information visible.
+              </p>
+              <button type="button" onClick={scrollToAtlas} className="group flex w-fit items-center gap-3 border-b border-background/50 pb-2 font-mono text-[11px] uppercase tracking-[0.16em] transition-colors hover:border-accent-signal hover:text-accent-signal">
+                Explore the concept
+                <ArrowDown className="size-4 transition-transform group-hover:translate-y-1" />
+              </button>
+            </div>
 
-          <p className="max-w-md text-pretty text-[15px] leading-relaxed text-muted-foreground">
-            ATIS is a calm, document-first investigation surface for African
-            markets. Move from a country, to a company, to the permit that ties
-            them together — without losing the thread.
-          </p>
-
-          <div className="flex flex-col gap-4 border-t border-border pt-6">
-            <Feature
-              icon={<Globe2 className="size-4" />}
-              title="Geographic entry"
-              body="Begin at the map. Every nation opens an intelligence file."
-            />
-            <Feature
-              icon={<Layers className="size-4" />}
-              title="Layered records"
-              body="Economy, regulators, projects and resources, structured per country."
-            />
-            <Feature
-              icon={<Network className="size-4" />}
-              title="Traceable relations"
-              body="Follow links between entities like footnotes in a dossier."
-            />
+            <div className="border border-background/20 font-mono text-[10px] uppercase tracking-[0.14em] text-background/60">
+              <div className="border-b border-background/15 px-4 py-3">A system for following the thread</div>
+              <div className="grid grid-cols-2 gap-px bg-background/15">
+                <PreviewCell label="Begin" value="Africa" />
+                <PreviewCell label="Open" value="Entities" />
+                <PreviewCell label="Trace" value="Relations" />
+                <PreviewCell label="Read" value="Context" />
+              </div>
+              <div className="flex items-center gap-3 border-t border-background/15 px-4 py-4 text-background/80">
+                <Network className="size-4 text-accent-signal" />
+                <span>One entity rarely tells the story. The relationships do.</span>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div className="mt-10 flex flex-col gap-3">
-          <Eyebrow>Deep-coverage files</Eyebrow>
-          <div className="flex flex-wrap gap-2">
-            {FLAGSHIP_PREVIEW.map((id) => {
-              const c = getCountry(id)
-              if (!c) return null
-              return (
-                <button
-                  key={id}
-                  onClick={() => onEnterCountry(id)}
-                  className="group flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-sm text-foreground transition-colors hover:border-foreground hover:bg-foreground hover:text-background"
-                >
-                  {c.name}
-                  <ArrowRight className="size-3 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" />
-                </button>
-              )
-            })}
+          <div className="flex items-end justify-between border-t border-background/15 pt-5 font-mono text-[10px] uppercase tracking-[0.16em] text-background/45">
+            <span>Concept / in development</span>
+            <span>01 — 26</span>
           </div>
         </div>
       </section>
 
-      {/* Map stage */}
-      <section className="relative flex min-h-[60vh] items-stretch bg-secondary/40 lg:min-h-0">
-        <div className="absolute left-5 top-5 z-10 flex flex-col gap-1 sm:left-8 sm:top-8">
-          <Eyebrow>Figure 01 — Continental overview</Eyebrow>
-          <span className="text-xs text-muted-foreground">
-            Hover to identify · click to preview · double-click to enter
-          </span>
-        </div>
+      <section id="atlas-entry" className="scroll-mt-16 border-b border-border bg-secondary/40">
+        <div className="mx-auto grid max-w-7xl gap-0 lg:grid-cols-[minmax(0,440px)_1fr]">
+          <div className="flex flex-col justify-between border-b border-border px-6 py-10 sm:px-10 lg:border-b-0 lg:border-r lg:px-12 lg:py-14">
+            <div className="flex flex-col gap-7">
+              <div className="flex items-center gap-2">
+                <span className="inline-block size-1.5 rounded-full bg-accent-signal" />
+                <Eyebrow>Figure 01 · Continental overview</Eyebrow>
+              </div>
+              <h2 className="text-balance font-serif text-4xl leading-[1.02] tracking-tight sm:text-5xl">Start anywhere. Follow the connections.</h2>
+              <p className="max-w-md text-pretty text-[15px] leading-relaxed text-muted-foreground">
+                This public preview shows the shape of ATIS: begin with a country, open an entity, and follow the relationships outward. The records here are illustrative, not live intelligence.
+              </p>
+              <div className="flex flex-col gap-4 border-t border-border pt-6">
+                <Feature icon={<ScanLine className="size-4" />} title="Country → entity → context" body="A geographic starting point becomes a path through institutions, projects, resources and markets." />
+                <Feature icon={<Network className="size-4" />} title="The relationship is the record" body="Trace ownership, regulation, infrastructure, trade and investment as connected information." />
+              </div>
+            </div>
+            <div className="mt-12 flex flex-col gap-3">
+              <Eyebrow>Concept files / illustrative</Eyebrow>
+              <div className="flex flex-wrap gap-2">
+                {FLAGSHIP_PREVIEW.map((id) => {
+                  const country = getCountry(id)
+                  if (!country) return null
+                  return <button key={id} onClick={() => onEnterCountry(id)} className="group flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-sm text-foreground transition-colors hover:border-foreground hover:bg-foreground hover:text-background">{country.name}<ArrowRight className="size-3 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" /></button>
+                })}
+              </div>
+            </div>
+          </div>
 
-        <div className="flex-1 px-2 py-6 sm:px-6 sm:py-10">
-          <AfricaMap
-            selectedId={selectedId}
-            onSelect={(id) => setSelectedId((cur) => (cur === id ? null : id))}
-            onEnter={onEnterCountry}
-          />
+          <div className="relative flex min-h-[62vh] items-stretch bg-background">
+            <div className="absolute left-5 top-5 z-10 flex flex-col gap-1 sm:left-8 sm:top-8">
+              <Eyebrow>Concept map / 50 nations</Eyebrow>
+              <span className="text-xs text-muted-foreground">Hover to identify · click to preview · double-click to enter</span>
+            </div>
+            <div className="flex-1 px-2 py-8 sm:px-6 sm:py-12">
+              <AfricaMap selectedId={selectedId} onSelect={(id) => setSelectedId((current) => (current === id ? null : id))} onEnter={onEnterCountry} />
+            </div>
+            <CountryDrawer countryId={selectedId} onClose={() => setSelectedId(null)} onEnter={onEnterCountry} />
+          </div>
         </div>
+      </section>
 
-        <CountryDrawer
-          countryId={selectedId}
-          onClose={() => setSelectedId(null)}
-          onEnter={onEnterCountry}
-        />
+      <section className="mx-auto grid max-w-7xl gap-10 px-6 py-16 sm:px-10 lg:grid-cols-[0.8fr_1.2fr] lg:px-16 lg:py-24">
+        <div>
+          <Eyebrow>Reading the system</Eyebrow>
+          <h2 className="mt-5 max-w-sm text-balance font-serif text-4xl leading-tight tracking-tight sm:text-5xl">From information to context. From context to intelligence.</h2>
+        </div>
+        <div className="grid gap-0 border-t border-border sm:grid-cols-2">
+          <SystemRow label="Query" body="Ask across the knowledge system." />
+          <SystemRow label="Discovery" body="Find countries, companies, institutions and projects." />
+          <SystemRow label="Investigation" body="Turn a question or event into a persistent thread." />
+          <SystemRow label="Evidence" body="Ground findings in supporting information." />
+          <SystemRow label="Report" body="Structure findings, implications and unresolved questions." />
+          <SystemRow label="Execution" body="Translate validated opportunities into pathways." />
+        </div>
+      </section>
+
+      <section className="border-t border-border px-6 py-10 sm:px-10 lg:px-16">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground sm:flex-row sm:items-start sm:justify-between">
+          <span>ATIS / Concept / Illustrative data</span>
+          <p className="max-w-xl font-sans text-xs normal-case leading-relaxed tracking-normal text-muted-foreground">ATIS is presented here as a working concept. The interface and information structures demonstrate how the system is intended to work. The data shown in this public preview is illustrative and should not be interpreted as verified economic, corporate, regulatory or investment intelligence.</p>
+        </div>
       </section>
     </div>
   )
 }
 
-function Feature({
-  icon,
-  title,
-  body,
-}: {
-  icon: React.ReactNode
-  title: string
-  body: string
-}) {
-  return (
-    <div className="flex gap-3">
-      <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full border border-border text-foreground">
-        {icon}
-      </span>
-      <div className="flex flex-col gap-0.5">
-        <span className="text-sm font-medium text-foreground">{title}</span>
-        <span className="text-[13px] leading-relaxed text-muted-foreground">{body}</span>
-      </div>
-    </div>
-  )
+function PreviewCell({ label, value }: { label: string; value: string }) {
+  return <div className="flex min-h-24 flex-col justify-between bg-background/5 p-4"><span className="text-background/40">{label}</span><span className="font-serif text-2xl normal-case tracking-tight text-background">{value}</span></div>
+}
+
+function Feature({ icon, title, body }: { icon: React.ReactNode; title: string; body: string }) {
+  return <div className="flex gap-3"><span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full border border-border text-foreground">{icon}</span><div className="flex flex-col gap-0.5"><span className="text-sm font-medium text-foreground">{title}</span><span className="text-[13px] leading-relaxed text-muted-foreground">{body}</span></div></div>
+}
+
+function SystemRow({ label, body }: { label: string; body: string }) {
+  return <div className="flex min-h-28 flex-col justify-between border-b border-border py-5 pr-5"><span className="font-mono text-[10px] uppercase tracking-[0.16em] text-accent-signal">{label}</span><span className="max-w-[18rem] text-sm leading-relaxed text-muted-foreground">{body}</span></div>
 }

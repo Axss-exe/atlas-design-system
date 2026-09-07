@@ -19,9 +19,10 @@ export function TopNav({
     <header className="sticky top-0 z-30 flex items-center justify-between border-b border-border bg-background/80 px-5 py-3.5 backdrop-blur-md sm:px-8">
       <button
         onClick={onHome}
-        className="group flex items-baseline gap-2.5 text-left"
+        className="group flex items-center gap-2.5 text-left"
         aria-label="ATIS home"
       >
+        <img src="/atis-symbol-traced.svg" alt="" className="size-8 object-contain invert" />
         <span className="font-mono text-base font-semibold tracking-[0.18em] text-foreground">
           ATIS
         </span>
