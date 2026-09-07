@@ -1,5 +1,5 @@
-import { AtisApp } from '@/components/atis/atis-app'
+import { PublicHome } from '@/components/atis/public-home'
 
 export default function Page() {
-  return <AtisApp />
+  return <PublicHome />
 }
