@@ -29,8 +29,8 @@ export function LandingView({ onEnterCountry }: { onEnterCountry: (id: string) =
 
           <div className="grid gap-12 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-20">
             <div className="flex flex-col gap-8">
-              <div className="flex items-center gap-2 text-accent-signal">
-                <span className="size-1.5 rounded-full bg-current" />
+              <div className="flex items-center gap-3 text-accent-signal">
+                <img src="/atis-symbol-traced.svg" alt="ATIS symbol" className="size-12 object-contain sm:size-14" />
                 <span className="font-mono text-[10px] uppercase tracking-[0.2em]">Africa Trade Intelligence System</span>
               </div>
               <h1 className="max-w-4xl text-balance font-serif text-[clamp(3.5rem,10vw,8.5rem)] leading-[0.86] tracking-[-0.06em]">

@@ -19,7 +19,7 @@ export function PublicHome() {
     <main className="min-h-screen bg-background text-foreground">
       <header className="mx-auto flex max-w-6xl items-center justify-between border-b border-border px-5 py-5 sm:px-8">
         <Link href="/" className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em]" aria-label="ATIS home">
-          <span className="flex size-7 items-center justify-center border border-foreground font-serif text-base tracking-normal">A</span>
+          <img src="/atis-symbol-traced.svg" alt="" className="size-8 object-contain invert" />
           <span>ATIS</span>
         </Link>
         <Pill>Concept / pilot</Pill>
