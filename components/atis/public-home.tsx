@@ -115,6 +115,24 @@ export function PublicHome() {
         </div>
       </section>
 
+      <section className="border-t border-border">
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24 lg:py-24">
+          <div>
+            <SectionLabel index="05" title="Origin note" />
+          </div>
+          <div className="max-w-2xl">
+            <Eyebrow>Powered by AKSOS</Eyebrow>
+            <h2 className="mt-7 max-w-xl text-balance font-serif text-4xl leading-tight tracking-tight sm:text-5xl">Built from a larger idea.</h2>
+            <p className="mt-7 max-w-xl text-base leading-7 text-muted-foreground">ATIS is developed by AKSOS — an initiative focused on building the information, intelligence and infrastructure needed to better understand and connect African markets.</p>
+            <p className="mt-5 text-base leading-7 text-muted-foreground">ATIS is one part of that work.</p>
+            <a href="https://aksos.net" target="_blank" rel="noreferrer" className="group mt-10 inline-flex items-center gap-3 border-b border-foreground pb-2 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors hover:border-accent-signal hover:text-accent-signal">
+              Explore AKSOS
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+            </a>
+          </div>
+        </div>
+      </section>
+
       <footer className="border-t border-border px-5 py-6 sm:px-8">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <span>ATIS / First public chapter</span>
