@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowRight, ScanLine } from 'lucide-react'
+import { ArrowRight, Network, ScanLine } from 'lucide-react'
 import { useState } from 'react'
 import { COUNTRY_IDS, getCountry } from '@/lib/atis/countries'
 import { isFlagship } from '@/lib/atis/entities'
